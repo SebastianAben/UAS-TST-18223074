@@ -6,7 +6,6 @@ services:
       - "1234:1234"
     restart: unless-stopped
     volumes:
-      # Mounting file database agar data tidak hilang (persist) di host
-      - ./database.sqlite:/app/database.sqlite
+      - ./data:/app/data
     environment:
       - NODE_ENV=production

@@ -12,9 +12,19 @@ app.use(bodyParser.json());
 const path = require('path');
 
 // Database setup
+const dbPath = process.env.NODE_ENV === 'production' 
+  ? path.join(__dirname, 'data', 'database.sqlite') 
+  : path.join(__dirname, 'data', 'database.sqlite');
+
+const fs = require('fs');
+const dataDir = path.join(__dirname, 'data');
+if (!fs.existsSync(dataDir)){
+    fs.mkdirSync(dataDir);
+}
+
 const sequelize = new Sequelize({
   dialect: 'sqlite',
-  storage: path.join(__dirname, 'database.sqlite'),
+  storage: dbPath,
   logging: false
 });
 
