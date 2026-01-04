@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  user-service:
+    build: .
+    ports:
+      - "1234:1234"
+    volumes:
+      # Mounting file database agar data tidak hilang (persist) di host
+      - ./database.sqlite:/app/database.sqlite
+    environment:
+      - NODE_ENV=production
